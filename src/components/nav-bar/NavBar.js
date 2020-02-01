@@ -1,12 +1,14 @@
 import React from "react";
-
 import "./nav-bar.styles.scss";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import CartIcon from "../cart-icon/CartIcon";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { auth } from "../../firebase/firebase-utils";
+import CartDropdown from "../cart-dropdown/CartDropdown";
 
-const NavBar = ({ user }) => {
+const NavBar = ({ user, cart }) => {
+  console.log(cart);
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -28,13 +30,16 @@ const NavBar = ({ user }) => {
             Sign In
           </Link>
         )}
+        <CartIcon />
       </div>
+      {cart.hidden ? null : <CartDropdown />}
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  cart: state.cart
 });
 
 export default connect(mapStateToProps)(NavBar);
