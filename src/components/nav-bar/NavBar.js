@@ -1,6 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import "./nav-bar.styles.scss";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { auth } from "../../firebase/firebase-utils";
 
@@ -17,7 +19,7 @@ const NavBar = ({ user }) => {
         <Link className="option" to="/shop">
           Contact
         </Link>
-        {user ? (
+        {user.user ? (
           <div className="option" onClick={() => auth.signOut()}>
             Sign Out
           </div>
@@ -31,4 +33,8 @@ const NavBar = ({ user }) => {
   );
 };
 
-export default NavBar;
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+export default connect(mapStateToProps)(NavBar);
