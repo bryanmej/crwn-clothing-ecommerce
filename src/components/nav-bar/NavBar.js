@@ -8,7 +8,6 @@ import { auth } from "../../firebase/firebase-utils";
 import CartDropdown from "../cart-dropdown/CartDropdown";
 
 const NavBar = ({ user, cart }) => {
-  console.log(cart);
   return (
     <div className="header">
       <Link className="logo-container" to="/">
