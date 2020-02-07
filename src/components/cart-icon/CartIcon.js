@@ -18,9 +18,6 @@ const mapDispatchToProps = dispatch => ({
   toggleHidden: () => dispatch(toggleHidden())
 });
 
-const mapStateToProps = state => {
-  console.log("iam called");
-  return { itemCount: cartItemsCount(state) };
-};
+const mapStateToProps = state => ({ itemCount: cartItemsCount(state) });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);

@@ -1,13 +1,17 @@
 import React from "react";
 import "./nav-bar.styles.scss";
+import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import CartIcon from "../cart-icon/CartIcon";
-import { ReactComponent as Logo } from "../../assets/crown.svg";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../redux/user/user-selectors";
+import { selectHidden } from "../../redux/cart/cart-selectors";
 import { auth } from "../../firebase/firebase-utils";
+import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/CartDropdown";
 
-const NavBar = ({ user, cart }) => {
+const NavBar = ({ currentUser, hidden }) => {
+  console.log(currentUser);
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -20,7 +24,7 @@ const NavBar = ({ user, cart }) => {
         <Link className="option" to="/shop">
           Contact
         </Link>
-        {user.user ? (
+        {currentUser ? (
           <div className="option" onClick={() => auth.signOut()}>
             Sign Out
           </div>
@@ -31,14 +35,14 @@ const NavBar = ({ user, cart }) => {
         )}
         <CartIcon />
       </div>
-      {cart.hidden ? null : <CartDropdown />}
+      {hidden ? null : <CartDropdown />}
     </div>
   );
 };
 
-const mapStateToProps = state => ({
-  user: state.user,
-  cart: state.cart
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  hidden: selectHidden
 });
 
 export default connect(mapStateToProps)(NavBar);
