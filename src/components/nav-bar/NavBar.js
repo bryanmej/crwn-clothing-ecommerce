@@ -11,7 +11,6 @@ import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/CartDropdown";
 
 const NavBar = ({ currentUser, hidden }) => {
-  console.log(currentUser);
   return (
     <div className="header">
       <Link className="logo-container" to="/">
