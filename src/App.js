@@ -4,7 +4,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { setUser } from "./redux/user/user-actions";
 import NavBar from "./components/nav-bar/NavBar";
-import HomePage from "./pages/homepage/homePage";
+import HomePage from "./pages/homePage/homePage";
 import ShopPage from "./pages/shopPage/shopPage";
 import AuthPage from "./pages/authPage/authPage";
 import CheckoutPage from "./pages/checkoutPage/checkoutPage";
