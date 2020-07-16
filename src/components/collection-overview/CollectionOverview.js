@@ -7,14 +7,14 @@ import CollectionPreview from "../collection-preview/CollectionPreview";
 
 const CollectionOverview = ({ collection }) => (
   <OverviewContainer>
-    {collection.map(({ id, ...otherProps }) => (
-      <CollectionPreview key={id} {...otherProps} />
+    {collection.map(({ id, ...otherProps }, i) => (
+      <CollectionPreview key={i} {...otherProps} />
     ))}
   </OverviewContainer>
 );
 
 const mapStateToProps = createStructuredSelector({
-  collection: selectPreviewCollection
+  collection: selectPreviewCollection,
 });
 
 export default connect(mapStateToProps)(CollectionOverview);
