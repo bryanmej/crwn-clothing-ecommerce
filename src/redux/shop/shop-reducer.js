@@ -2,7 +2,7 @@ import SHOP_DATA from "./shopData";
 
 const INITIAL_STATE = SHOP_DATA;
 
-export const shopReducer = (state = INITIAL_STATE, action) => {
+const shopReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "UPDATE_COLLECTIONS":
       return {
@@ -13,3 +13,5 @@ export const shopReducer = (state = INITIAL_STATE, action) => {
       return state;
   }
 };
+
+export default shopReducer;

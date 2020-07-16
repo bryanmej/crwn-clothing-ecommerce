@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { auth, createUserProfileDocument } from "./firebase/firebase-utils";
 import { connect } from "react-redux";
 import { setUser } from "./redux/user/user-actions";
 import { createStructuredSelector } from "reselect";
@@ -10,13 +11,13 @@ import HomePage from "./pages/homePage/homePage";
 import ShopPage from "./pages/shopPage/shopPage";
 import AuthPage from "./pages/authPage/authPage";
 import CheckoutPage from "./pages/checkoutPage/checkoutPage";
-import { auth, createUserProfileDocument } from "./firebase/firebase-utils";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
     const { setUser } = this.props;
+
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
       if (user) {
         const userRef = await createUserProfileDocument(user);
