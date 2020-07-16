@@ -9,7 +9,7 @@ const config = {
   projectId: "crwn-clothing-a317a",
   storageBucket: "crwn-clothing-a317a.appspot.com",
   messagingSenderId: "833450778539",
-  appId: "1:833450778539:web:1048818f1484886143bcee"
+  appId: "1:833450778539:web:1048818f1484886143bcee",
 };
 
 firebase.initializeApp(config);
@@ -29,7 +29,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         displayName,
         email,
         createdAt,
-        ...additionalData
+        ...additionalData,
       });
     } catch (error) {
       console.log("error creating user", error.message);
@@ -46,12 +46,26 @@ export const addCollectionAndDocuments = async (
   const collectionRef = firestore.collection(collectionKey);
 
   const batch = firestore.batch();
-  objectsToAdd.forEach(obj => {
+  objectsToAdd.forEach((obj) => {
     const newDocRef = collectionRef.doc();
     batch.set(newDocRef, obj);
   });
 
   return await batch.commit();
+};
+
+export const convertCollectionSnapshot = (collections) => {
+  const transformedCollection = collections.docs.map((doc) => {
+    const { title, itmes } = doc.data();
+
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      itmes,
+    };
+  });
+  console.log(transformedCollection);
 };
 
 export const auth = firebase.auth();

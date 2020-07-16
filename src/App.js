@@ -17,14 +17,14 @@ class App extends React.Component {
 
   componentDidMount() {
     const { setUser } = this.props;
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async user => {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
       if (user) {
         const userRef = await createUserProfileDocument(user);
 
-        userRef.onSnapshot(snapShot => {
+        userRef.onSnapshot((snapShot) => {
           setUser({
             id: snapShot.id,
-            ...snapShot.data()
+            ...snapShot.data(),
           });
         });
       }
@@ -49,7 +49,7 @@ class App extends React.Component {
             exact
             path="/auth"
             render={() =>
-              this.props.user.user ? <Redirect to="/" /> : <AuthPage />
+              this.props.user ? <Redirect to="/" /> : <AuthPage />
             }
           />
         </Switch>
@@ -59,11 +59,11 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
 });
 
-const mapDispatchToProps = dipatch => ({
-  setUser: user => dipatch(setUser(user))
+const mapDispatchToProps = (dipatch) => ({
+  setUser: (user) => dipatch(setUser(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
